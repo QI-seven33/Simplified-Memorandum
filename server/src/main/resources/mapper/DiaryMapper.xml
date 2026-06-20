@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.media.server.mapper.DiaryMapper">
+    <insert id="createDiary" parameterType="com.media.dto.DiaryDTO" useGeneratedKeys="true" keyProperty="id">
+        insert into diary( user_id, title, content, date, created_at, updated_at)
+        values
+            (#{userId},#{title},#{content},#{date},#{createdAt},#{updatedAt})
+
+    </insert>
+    <update id="updateByIdAndId">
+        UPDATE diary
+        <set>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            updated_at = #{updatedAt}
+        </set>
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+    <delete id="deleteByIdAndUserId">
+        delete from diary
+        where id = #{id} and user_id = #{userId}
+    </delete>
+
+
+    <select id="listByUserId" parameterType="java.lang.Long" resultType="com.media.entity.Diary">
+        SELECT id, title, content, date, created_at, updated_at
+        FROM diary
+        WHERE user_id = #{userId}
+        ORDER BY date DESC, id DESC
+    </select>
+    <select id="getDiaryContentById" resultType="com.media.vo.DiaryVO">
+        SELECT id, title, content, date
+        FROM diary
+        WHERE id = #{id}
+    </select>
+    <select id="selectByIdAndUserId" resultType="com.media.entity.Diary">
+        SELECT id, user_id, title, content, date, created_at, updated_at
+        FROM diary
+        WHERE id = #{id} AND user_id = #{userId}
+    </select>
+</mapper>

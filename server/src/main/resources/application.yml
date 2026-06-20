@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    protocol: ${MAIL_PROTOCOL}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH}
+          starttls:
+            enable: ${MAIL_STARTTLS_ENABLE}
+            required: ${MAIL_STARTTLS_REQUIRED}
+      charset: ${MAIL_CHARSET}
+
+try:
+  jwt:
+    admin-secret-key: ${JWT_ADMIN_SECRET}
+    admin-ttl: ${JWT_ADMIN_TTL}
+    admin-token-name: ${JWT_ADMIN_TOKEN_NAME}
+    user-secret-key: ${JWT_USER_SECRET}
+    user-ttl: ${JWT_USER_TTL}
+    user-token-name: ${JWT_USER_TOKEN_NAME}
+  alioss:
+    endpoint: ${ALI_ENDPOINT}
+    access-key-id: ${ALI_ACCESS_KEY_ID}
+    access-key-secret: ${ALI_ACCESS_KEY_SECRET}
+    bucket-name: ${ALI_BUCKET_NAME}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
